@@ -1,0 +1,8 @@
+Đóng vai trò là một Code Reviewer chuyên gia, hãy thực hiện phân tích và refactor lại đoạn mã nguồn (Service, Controller, Exception Handler) của dự án Mở tài khoản cơ bản. Cụ thể thực hiện các bước sau:
+
+1. Phân tích Code: Chỉ ra các Code Smell, Technical Debt hoặc điểm vi phạm nguyên lý SOLID (đặc biệt là Single Responsibility Principle) trong mã nguồn cũ.
+2. Thực hiện Refactor:
+   - Tách lớp Validation: Đưa các logic kiểm tra business (ví dụ: check trùng CCCD, SĐT) ra khỏi AccountServiceImpl để Service chỉ tập trung vào luồng xử lý chính.
+   - Global Exception Handler: Tạo một class ErrorResponse DTO chuẩn. Cập nhật @RestControllerAdvice để trả về ErrorResponse nhất quán thay vì trả về Map<String, String> như trước. Đảm bảo format lỗi có timestamp, status, error, message, path.
+   - Thêm Logging: Bổ sung log bằng SLF4J (sử dụng @Slf4j của Lombok) tại các điểm quan trọng: bắt đầu request ở Controller, trong Service, và ở các block catch/exception trong Global Exception Handler.
+3. Báo cáo Tóm tắt: Lập một bảng hoặc tài liệu tóm tắt so sánh "Mã nguồn trước Refactor vs Sau Refactor đã cải thiện được điều gì?".
